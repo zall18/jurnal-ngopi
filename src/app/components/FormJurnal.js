@@ -5,7 +5,7 @@ export default function FormJurnal({onCloseButtonClick, handleSubmitJurnal}) {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        console.log(formData);
+        console.log(formData.get('coffeeShop'));
         const newJurnal = {
             coffeeShop: formData.get('coffeeShop'),
             coffee: formData.get('coffee'),
