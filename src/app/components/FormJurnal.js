@@ -1,19 +1,29 @@
 "use client"
-export default function FormJurnal({onCloseButtonClick, handleSubmitJurnal}) {
+
+import { useState } from "react";
+
+export default function FormJurnal({onCloseButtonClick, handleSubmitJurnal, jurnal, index}) {
+
+    let [coffeeShop, setCoffeeShop] = useState(jurnal?.coffeeShop ?? '');
+    let [coffee, setCoffee] = useState(jurnal?.coffee ?? '');
+    let [price, setPrice] = useState(jurnal?.price ?? 0);
+    let [rating, setRating] = useState(jurnal?.rating ?? 0);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
-        console.log(formData.get('coffeeShop'));
         const newJurnal = {
-            coffeeShop: formData.get('coffeeShop'),
-            coffee: formData.get('coffee'),
-            rating: formData.get('rating'),
-            price: formData.get('price')
+            coffeeShop: coffeeShop,
+            coffee: coffee,
+            rating: rating,
+            price: price
         }
 
-        handleSubmitJurnal(newJurnal);
+        console.log(newJurnal);
+
+        jurnal ? handleSubmitJurnal(index, newJurnal) : handleSubmitJurnal(newJurnal); 
+
+        
     }
 
     return (
@@ -23,14 +33,14 @@ export default function FormJurnal({onCloseButtonClick, handleSubmitJurnal}) {
                       <h1 className="text-center text-2xl">Tambahkan Jurnal Coffee</h1>
                       <form onSubmit={handleSubmit}>
                         <label>Coffee Shop</label>
-                        <input type="text" className="w-full h-10 border-3 p-2" name="coffeeShop" />
+                        <input type="text" className="w-full h-10 border-3 p-2" name="coffeeShop" value={coffeeShop} onChange={(e) => setCoffeeShop(e.target.value)}/>
                         <label>Coffee</label>
-                        <input type="text" className="w-full h-10 border-3 p-2" name="coffee" />
+                        <input type="text" className="w-full h-10 border-3 p-2" name="coffee" value={coffee} onChange={(e) => setCoffee(e.target.value)}/>
                         <label>Price</label>
-                        <input type="number" className="w-full h-10 border-3 p-2" name="price" />
+                        <input type="number" className="w-full h-10 border-3 p-2" name="price" value={price} onChange={(e) => setPrice(e.target.value)}/>
                         <label>Rating</label>
-                        <input type="number" max={5} className="w-full h-10 border-3 p-2" name="rating" />
-                        <button className="w-full h-10 mt-4 bg-amber-400 text-white rounded-3xl cursor-pointer hover:bg-amber-600 transition-colors">Tambah Junal Ngopi</button>
+                        <input type="number" max={5} className="w-full h-10 border-3 p-2" name="rating" value={rating} onChange={(e) => setRating(e.target.value)}/>
+                        <button className="w-full h-10 mt-4 bg-amber-400 text-white rounded-3xl cursor-pointer hover:bg-amber-600 transition-colors">{jurnal ? "Update" : "Tambah"} Junal Ngopi</button>
                       </form>
                   </div>
                 </div>

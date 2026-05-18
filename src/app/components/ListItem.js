@@ -9,10 +9,10 @@ export default function ListItem({coffeeShop = "-", coffeeName = "-", rating = 4
                 </div>
                 <div>
                 <p className="text-lg">{coffeeShop}</p>
-                <p className="text-sm">{coffeeName} ({rating}/5) </p>
+                <p className="text-sm">{coffeeName}</p>
                 </div>
                 <div className="ml-4">
-                <p>4/5</p>
+                <p>{rating}/5</p>
                 </div>
             </div>
             <div>

@@ -28,7 +28,7 @@ export default function Home() {
       <HeroSection />
       <main className="w-1/2 h-auto mx-auto p-3">
         <FormButton OnClickButtonForm={onButtonFormClick} />
-          <ListMap jurnals={jurnals} />
+          <ListMap jurnals={jurnals} setJurnals={setJurnals} />
           {
             isOpen && (
                 <FormJurnal onCloseButtonClick={onButtonFormClick} handleSubmitJurnal={handleSubmitJurnal}/>
