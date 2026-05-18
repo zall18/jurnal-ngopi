@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeroSection from "./components/HeroSection";
 import ListItem from "./components/ListItem";
 import FormJurnal from "./components/FormJurnal";
@@ -11,6 +11,14 @@ export default function Home() {
 
   let [isOpen, setIsOpen] = useState(false);
   let [jurnals, setJurnals] = useState([]);
+  // let [jurnals, setJurnals] = useState(() => {
+  //   const savedData = localStorage.getItem('jurnals');
+  //   return savedData ? JSON.parse(savedData) : []; 
+  // });
+
+  // useEffect(() => {
+  //   localStorage.setItem('jurnals', JSON.stringify(jurnals));
+  // }, [jurnals]);
 
   function onButtonFormClick(condition) {
     setIsOpen(condition);
@@ -19,7 +27,7 @@ export default function Home() {
   const handleSubmitJurnal = (newJurnal) => {
     setJurnals([...jurnals, newJurnal]);
     setIsOpen(false);
-    console.log(jurnals);
+    // localStorage.setItem("jurnals", [...jurnals]);
   }
   
 
@@ -34,8 +42,8 @@ export default function Home() {
                 <FormJurnal onCloseButtonClick={onButtonFormClick} handleSubmitJurnal={handleSubmitJurnal}/>
             )
           }
+          {/* <ListMap jurnals={jurnals.sort((a, b) => b.rating - a.rating)} setJurnals={setJurnals} /> */}
 
-          
 
       </main>
     </div>

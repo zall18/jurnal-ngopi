@@ -1,19 +1,15 @@
 import { useState } from "react"
 import ListItem from "./ListItem"
 import FormJurnal from "./FormJurnal";
+import ListCard from "./ListCard";
 
 export default function ListMap({jurnals, setJurnals}) {
 
-    let [actions, setActions] = useState(false);
     let [isOpen, setIsOpen] = useState(false);
     let [dataEdit, setDataEdit] = useState(null);
     let [indexEdit, setIndexEdit] = useState(null);
 
-    console.log(jurnals);
 
-    function listOnClick() {
-        setActions(!actions);
-    } 
 
     function onDeleteClick(index) {
         let newJurnals = [...jurnals]
@@ -46,17 +42,7 @@ export default function ListMap({jurnals, setJurnals}) {
         <div className="w-full h-auto mt-3 border-2 rounded-3xl p-3 shadow-xl">
             { jurnals.map((jurnal, index) => {
                 return (
-                    <div className="relative transition-transform" key={index}>
-                        <ListItem coffeeName={jurnal.coffee} coffeeShop={jurnal.coffeeShop} rating={jurnal.rating} price={jurnal.price} onListClick={listOnClick}  />
-                        {
-                            actions && (
-                                <div className="flex flex-2 gap-2 border-2 rounded-2xl pt-5 -mt-6 -z-50 p-2">
-                                    <button className="w-full h-8 bg-yellow-600 rounded-full text-white mt-3 cursor-pointer" onClick={() => onUpdateClick(index, jurnal)}>Update</button>
-                                    <button className="w-full h-8 bg-red-700 rounded-full text-white mt-3 cursor-pointer" onClick={onDeleteClick}>Delete</button>
-                                </div>
-                            )
-                         }
-                    </div>
+                    <ListCard jurnal={jurnal} onDeleteClick={onDeleteClick} onUpdateClick={onUpdateClick} key={index} />
                 ) 
             }) }
             {
